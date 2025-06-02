@@ -3,8 +3,6 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import SingleProductPage from "./pages/SingleProductPage";
-// import Product from "./pages/Product";
-// import Auth from "./pages/Auth";
 
 function App() {
   return (

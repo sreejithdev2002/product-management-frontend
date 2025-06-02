@@ -1,82 +1,3 @@
-// import { IoCloseCircleOutline } from "react-icons/io5";
-// import { MdOutlineArrowForwardIos } from "react-icons/md";
-// import { GoHeart } from "react-icons/go";
-// import { Link } from "react-router";
-
-// import ProductImage from "../assets/ProductImage.jpg";
-
-// const wishlistItems = [
-//   {
-//     id: 1,
-//     title: "HP AMD Ryzen 3",
-//     price: 529.99,
-//     image: ProductImage,
-//   },
-//   {
-//     id: 2,
-//     title: "HP AMD Ryzen 3",
-//     price: 529.99,
-//     image: ProductImage,
-//   },
-// ];
-
-// function Wishlist({ isOpen, onClose }) {
-//   return (
-//     <div
-//       className={`fixed top-0 right-0 h-full w-[350px] bg-white shadow-2xl z-50 transition-transform duration-300 ${
-//         isOpen ? "translate-x-0" : "translate-x-full"
-//       }`}
-//     >
-//       <div className="bg-[#003F62] text-white px-4 py-[20.8px] flex justify-between items-center">
-//         <div className="flex items-center">
-//           <span className="bg-white p-3 rounded-full mx-3">
-//             <GoHeart size={20} color="black" />
-//           </span>
-//           <h2 className="text-lg">Items</h2>
-//         </div>
-//         <button onClick={onClose} className="cursor-pointer">
-//           <MdOutlineArrowForwardIos size={20} />
-//         </button>
-//       </div>
-
-//       <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-56px)]">
-//         {wishlistItems.map((item) => (
-//           <div
-//             key={item.id}
-//             className="flex items-start gap-3 border-b border-b-[#ACACAC] pb-4"
-//           >
-//             <Link to="/product/dell">
-//               <img
-//                 src={item.image}
-//                 alt={item.title}
-//                 className="w-20 h-20 rounded-xl object-cover border border-[#ACACAC]"
-//               />
-//             </Link>
-//             <div className="flex-1">
-//               <Link to="/product/dell">
-//                 <h3 className="text-sm font-medium text-[#003F62]">
-//                   {item.title}
-//                 </h3>
-//               </Link>
-//               <p className="text-sm font-semibold text-[#4A4A4A]">
-//                 ${item.price}
-//               </p>
-//               <div className="flex text-gray-400 mt-1">
-//                 <span>⭐️⭐️⭐️⭐️⭐️</span>
-//               </div>
-//             </div>
-//             <button className="self-center hover:text-red-500 cursor-pointer">
-//               <IoCloseCircleOutline size={20} />
-//             </button>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Wishlist;
-
 import { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
@@ -125,11 +46,11 @@ function Wishlist({ isOpen, onClose }) {
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-[350px] bg-white shadow-2xl z-50 transition-transform duration-300 ${
+      className={`fixed top-0 right-0 h-full w-1/2 md:w-1/3 lg:w-1/4 bg-white shadow-2xl z-50 transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="bg-[#003F62] text-white px-4 py-[20.8px] flex justify-between items-center">
+      <div className="bg-[#003F62] text-white px-4 py-[12.8px] flex justify-between items-center">
         <div className="flex items-center">
           <span className="bg-white p-3 rounded-full mx-3">
             <GoHeart size={20} color="black" />
