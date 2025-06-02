@@ -164,7 +164,7 @@ function Navbar({ onWishlistClick }) {
             <FiShoppingCart size={20} color="#fff" /> Cart
           </span>
           <span className="absolute -top-2 right-5 py-1 px-2 text-xs rounded-full bg-[#EDA415] text-white">
-            2
+            0
           </span>
         </Link>
       </div>
