@@ -57,7 +57,6 @@ function Navbar({ onWishlistClick }) {
 
   const [wishlistLength, setWishlistLength] = useState("");
 
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -70,7 +69,7 @@ function Navbar({ onWishlistClick }) {
       }
     };
     fetchProducts();
-  }, [onWishlistClick]);
+  }, []);
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
