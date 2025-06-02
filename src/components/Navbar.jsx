@@ -154,7 +154,7 @@ function Navbar({ onWishlistClick }) {
         <button onClick={onWishlistClick} className="cursor-pointer relative">
           <GoHeart size={20} color="#fff" />
           <span className="absolute -top-5 left-3 py-1 px-2 text-xs rounded-full bg-[#EDA415] text-white">
-            {wishlistLength}
+            {wishlistLength || 0}
           </span>
         </button>
         <Link to="/auth">
