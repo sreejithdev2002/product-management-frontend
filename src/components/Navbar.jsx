@@ -101,7 +101,7 @@ function Navbar({ onWishlistClick }) {
     setShowResults(false);
   };
 
-  const baseURL = "http://localhost:5000";
+  const baseURL = import.meta.env.VITE_BASE_URL;
 
   return (
     <nav className="bg-[#003F62] py-5 flex justify-between relative">

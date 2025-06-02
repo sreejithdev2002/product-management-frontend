@@ -1,231 +1,3 @@
-// import { useState, useEffect } from "react";
-// import { useParams } from "react-router";
-
-// import CustomBreadcrumbs from "../components/CustomBreadCrumbs";
-// import Navbar from "../components/Navbar";
-// import Wishlist from "../components/Wishlist";
-
-// import { IoMdCheckmark, IoMdClose } from "react-icons/io";
-// import { FaMinus, FaPlus } from "react-icons/fa";
-// import { GoHeart } from "react-icons/go";
-// import serviceApi from "../axios/axios";
-
-// function SingleProductPage() {
-//   const { id } = useParams();
-//   const [product, setProduct] = useState(null);
-//   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
-//   const [isWishlistOpen, setWishlistOpen] = useState(false);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   const [quantity, setQuantity] = useState(1);
-
-//   const [isEditing, setIsEditing] = useState(false);
-//   const [editTitle, setEditTitle] = useState("");
-//   const [editPrice, setEditPrice] = useState("");
-//   const [editQuantity, setEditQuantity] = useState("");
-
-//   const baseUrl = "http://localhost:5000";
-
-//   useEffect(() => {
-//     const fetchProduct = async () => {
-//       try {
-//         setLoading(true);
-//         const res = await serviceApi.get(`/product/product/${id}`);
-//         setProduct(res.data);
-//         setSelectedVariantIndex(0); // Reset variant selection on product change
-//         setQuantity(1); // Reset quantity when product/variant changes
-//         setLoading(false);
-//       } catch (err) {
-//         setError("Failed to load product.");
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchProduct();
-//   }, [id]);
-
-//   if (loading) return <div className="text-center py-20">Loading...</div>;
-//   if (error)
-//     return <div className="text-center py-20 text-red-600">{error}</div>;
-//   if (!product)
-//     return <div className="text-center py-20">Product not found</div>;
-
-//   const breadcrumbPaths = [
-//     { label: "Home", href: "/" },
-//     { label: "Product details", href: "/" },
-//     {
-//       label: product.subCategory?.name || "Subcategory",
-//       href: `/product/${id}`,
-//     },
-//   ];
-
-//   const selectedVariant = product.variants?.[selectedVariantIndex];
-
-//   return (
-
-//     <div className="mb-20">
-//       <Navbar onWishlistClick={() => setWishlistOpen(true)} />
-//       <Wishlist
-//         isOpen={isWishlistOpen}
-//         onClose={() => setWishlistOpen(false)}
-//       />
-
-//       <div className="flex items-center justify-between px-20 py-8">
-//         <CustomBreadcrumbs paths={breadcrumbPaths} />
-//       </div>
-
-//       <div className="flex px-20 gap-10">
-//         {/* Left images section */}
-//         <div className="flex flex-col gap-4 w-1/2">
-//           <div className="w-full h-[350px] border border-gray-300 rounded-2xl bg-white flex items-center justify-center">
-//             <img
-//               src={
-//                 product.images && product.images.length > 0
-//                   ? `${baseUrl}/${product.images[0]}`
-//                   : "/fallback-image.jpg"
-//               }
-//               alt={product.title}
-//               className="max-h-full max-w-full object-contain"
-//             />
-//           </div>
-
-//           <div className="flex gap-4">
-//             {product.images &&
-//               product.images.slice(1, 3).map((img, idx) => (
-//                 <div
-//                   key={idx}
-//                   className="w-1/2 h-[150px] border border-gray-300 rounded-2xl bg-white flex items-center justify-center"
-//                 >
-//                   <img
-//                     src={`${baseUrl}/${img}`}
-//                     alt={`${product.title} ${idx + 2}`}
-//                     className="max-h-full max-w-full object-contain"
-//                   />
-//                 </div>
-//               ))}
-//           </div>
-//         </div>
-
-//         {/* Right side content */}
-//         <div className="flex-1 space-y-3">
-//           <h2 className="text-[#003F62] text-xl font-semibold">
-//             {product.title}
-//           </h2>
-
-//           <h3 className="text-[#4A4A4A] text-xl font-semibold">
-//             {product.variants && product.variants.length > 0
-//               ? `$${product.variants[selectedVariantIndex]?.price}`
-//               : "Price not available"}
-//           </h3>
-
-//           <div className="flex gap-x-3">
-//             <p>Availability:</p>
-//             {selectedVariant?.quantity < 1 ? (
-//               <div className="flex items-center space-x-1">
-//                 <IoMdClose color="red" />
-//                 <span className="text-red-500">Out Of Stock</span>
-//               </div>
-//             ) : (
-//               <div className="flex items-center space-x-1">
-//                 <IoMdCheckmark color="green" />
-//                 <span className="text-green-700">In Stock</span>
-//               </div>
-//             )}
-//           </div>
-
-//           <p className="text-xs text-[#5D5D5D]">
-//             {selectedVariant?.quantity < 1
-//               ? ""
-//               : `Hurry up! Only ${
-//                   selectedVariant?.quantity || "N/A"
-//                 } product left in
-//             stock!`}
-//           </p>
-
-//           <div className="border border-[#BDBDBD] w-full my-10" />
-
-//           <div className="flex items-center gap-x-5">
-//             <h2 className="font-semibold text-[#232323]">Variants:</h2>
-//             {product.variants &&
-//               product.variants.map((variant, idx) => (
-//                 <button
-//                   key={idx}
-//                   className={`py-2 px-4 border-2 rounded-lg ${
-//                     selectedVariantIndex === idx
-//                       ? "bg-[#003F62] text-white"
-//                       : "bg-[#EEEEEE]"
-//                   }`}
-//                   onClick={() => setSelectedVariantIndex(idx)}
-//                 >
-//                   {variant.ram || variant.name || `Option ${idx + 1}`}
-//                 </button>
-//               ))}
-//           </div>
-
-//           {/* Quantity Section */}
-//           {selectedVariant?.quantity > 0 ? (
-//             <div className="flex items-center my-5">
-//               <h2 className="font-semibold text-[#232323] mr-5">Quantity:</h2>
-//               <button
-//                 onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-//                 className="p-3 border border-[#BDBDBD] bg-[#EEEEEE]"
-//                 disabled={quantity <= 1}
-//               >
-//                 <FaMinus size={8} />
-//               </button>
-//               <div className="py-1 px-8 border border-[#BDBDBD] bg-[#EEEEEE]">
-//                 {quantity}
-//               </div>
-//               <button
-//                 onClick={() =>
-//                   setQuantity((prev) =>
-//                     Math.min(selectedVariant?.quantity, prev + 1)
-//                   )
-//                 }
-//                 className="p-3 border border-[#BDBDBD] bg-[#EEEEEE]"
-//                 disabled={quantity >= selectedVariant?.quantity}
-//               >
-//                 <FaPlus size={8} />
-//               </button>
-//             </div>
-//           ) : (
-//             <div className="my-5 text-red-600 font-semibold text-lg">
-//               Out of Stock
-//             </div>
-//           )}
-
-//           <div className="flex items-center gap-x-5 mt-8">
-//             {/* <button className="bg-[#EDA415] font-semibold py-3 px-8 rounded-3xl text-white">
-//               Edit Product
-//             </button> */}
-//             <button
-//               className="bg-[#EDA415] font-semibold py-3 px-8 rounded-3xl text-white"
-//               onClick={() => {
-//                 setIsEditing(true);
-//                 setEditTitle(product.title);
-//                 setEditPrice(selectedVariant?.price || "");
-//                 setEditQuantity(selectedVariant?.quantity || "");
-//               }}
-//             >
-//               Edit Product
-//             </button>
-
-//             <button className="bg-[#EDA415] font-semibold py-3 px-8 rounded-3xl text-white">
-//               Buy it now
-//             </button>
-//             <button className="p-3 rounded-full bg-[#EEEEEE]">
-//               <GoHeart size={24} />
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default SingleProductPage;
-
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
@@ -258,7 +30,7 @@ function SingleProductPage() {
   const [productTitle, setProductTitle] = useState("");
   const [variants, setVariants] = useState([]);
 
-  const baseUrl = "http://localhost:5000";
+  const baseURL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -374,7 +146,7 @@ function SingleProductPage() {
             <img
               src={
                 product.images && product.images.length > 0
-                  ? `${baseUrl}/${product.images[0]}`
+                  ? `${baseURL}/${product.images[0]}`
                   : "/fallback-image.jpg"
               }
               alt={product.title}
@@ -390,7 +162,7 @@ function SingleProductPage() {
                   className="w-1/2 h-[150px] border border-gray-300 rounded-2xl bg-white flex items-center justify-center"
                 >
                   <img
-                    src={`${baseUrl}/${img}`}
+                    src={`${baseURL}/${img}`}
                     alt={`${product.title} ${idx + 2}`}
                     className="max-h-full max-w-full object-contain"
                   />

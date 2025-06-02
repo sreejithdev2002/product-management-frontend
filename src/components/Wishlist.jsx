@@ -121,6 +121,8 @@ function Wishlist({ isOpen, onClose }) {
     }
   };
 
+  const baseURL = import.meta.env.VITE_BASE_URL;
+
   return (
     <div
       className={`fixed top-0 right-0 h-full w-[350px] bg-white shadow-2xl z-50 transition-transform duration-300 ${
@@ -154,7 +156,7 @@ function Wishlist({ isOpen, onClose }) {
             >
               <Link to={`/product/${item._id}`}>
                 <img
-                  src={`http://localhost:5000/${item.images?.[0]}`}
+                  src={`${baseURL}/${item.images?.[0]}`}
                   alt={item.title}
                   className="w-20 h-20 rounded-xl object-cover border border-[#ACACAC]"
                 />
