@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { GoHeart } from "react-icons/go";
-import { Link } from "react-router"; // use react-router-dom for v5 or v6
+import { Link } from "react-router-dom"; // use react-router-dom for v5 or v6
 import serviceApi from "../axios/axios"; // Your axios instance
 
 function Wishlist({ isOpen, onClose }) {

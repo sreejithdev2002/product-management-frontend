@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GoHeart } from "react-icons/go";
 import { FiShoppingCart } from "react-icons/fi";
-import { Link } from "react-router"; // Make sure you're using react-router-dom
+import { Link } from "react-router-dom"; // Make sure you're using react-router-dom
 import serviceApi from "../axios/axios";
 
 function Navbar({ onWishlistClick }) {
@@ -64,7 +64,7 @@ function Navbar({ onWishlistClick }) {
             value={searchQuery}
             onChange={handleSearchChange}
             onFocus={handleFocus}
-            onBlur={() => setTimeout(() => setShowResults(false), 100)}
+            onBlur={() => setTimeout(() => setShowResults(false), 500)}
             placeholder="Search any things"
             className="w-full py-2 pl-4 pr-20 rounded-2xl border bg-white text-sm border-gray-300 focus:outline-none focus:ring focus:ring-[#EDA415]"
           />
