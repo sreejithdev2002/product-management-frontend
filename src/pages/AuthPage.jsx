@@ -184,151 +184,146 @@ export default function AuthPage() {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:block relative h-screen w-full bg-white overflow-hidden">
-        {/* Sign In Form - Desktop */}
-        <div
-          className={`w-[60%] h-full flex flex-col justify-center items-center bg-white px-10 transition-opacity duration-500 ${
-            isSignUp ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <h2 className="text-3xl xl:text-5xl font-bold text-[#EDA415] mb-6 w-full max-w-md text-center">
-            Sign In to Your Account
-          </h2>
-          <form className="space-y-4 w-full max-w-md" onSubmit={handleSignIn}>
-            <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
-              <FiMail size={20} className="text-gray-400 mr-3" />
-              <input
-                type="email"
-                placeholder="Email"
-                value={signInEmail}
-                onChange={(e) => setSignInEmail(e.target.value)}
-                className="outline-none w-full bg-transparent"
-                required
-              />
-            </div>
-            <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
-              <FiLock size={20} className="text-gray-400 mr-3" />
-              <input
-                type="password"
-                placeholder="Password"
-                value={signInPassword}
-                onChange={(e) => setSignInPassword(e.target.value)}
-                className="outline-none w-full bg-transparent"
-                required
-              />
-            </div>
-            <div className="text-center">
-              <button
-                type="button"
-                className="text-center underline font-semibold cursor-pointer text-[#EDA415] hover:text-[#d7920a] transition"
-              >
-                Forgot password?
-              </button>
-            </div>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="bg-[#EDA415] text-white font-medium py-3 px-12 rounded-full hover:bg-[#d7920a] transition"
-              >
-                SIGN IN
-              </button>
-            </div>
-          </form>
-        </div>
+<div className={`hidden lg:flex h-screen w-full overflow-hidden transition-all duration-700 ${isSignUp ? "flex-row" : "flex-row-reverse"}`}>
+  {/* Form Side */}
+  <div className="w-[60%] h-full flex flex-col justify-center items-center bg-white px-10 transition-all duration-500 z-10">
+    {isSignUp ? (
+      <>
+        {/* Sign Up Form */}
+        <h2 className="text-3xl xl:text-5xl font-bold text-[#EDA415] mb-6 text-center">
+          Create Account
+        </h2>
+        <form className="space-y-4 w-full max-w-md" onSubmit={handleSignUp}>
+          <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
+            <FiUser size={20} className="text-gray-400 mr-3" />
+            <input
+              type="text"
+              placeholder="Name"
+              value={signUpName}
+              onChange={(e) => setSignUpName(e.target.value)}
+              className="bg-transparent outline-none w-full"
+              required
+            />
+          </div>
+          <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
+            <FiMail size={20} className="text-gray-400 mr-3" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={signUpEmail}
+              onChange={(e) => setSignUpEmail(e.target.value)}
+              className="outline-none w-full bg-transparent"
+              required
+            />
+          </div>
+          <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
+            <FiLock size={20} className="text-gray-400 mr-3" />
+            <input
+              type="password"
+              placeholder="Password"
+              value={signUpPassword}
+              onChange={(e) => setSignUpPassword(e.target.value)}
+              className="outline-none w-full bg-transparent"
+              required
+            />
+          </div>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-[#EDA415] text-white font-medium py-3 px-12 rounded-full hover:bg-[#d7920a] transition"
+            >
+              SIGN UP
+            </button>
+          </div>
+        </form>
+      </>
+    ) : (
+      <>
+        {/* Sign In Form */}
+        <h2 className="text-3xl xl:text-5xl font-bold text-[#EDA415] mb-6 w-full max-w-md text-center">
+          Sign In to Your Account
+        </h2>
+        <form className="space-y-4 w-full max-w-md" onSubmit={handleSignIn}>
+          <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
+            <FiMail size={20} className="text-gray-400 mr-3" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={signInEmail}
+              onChange={(e) => setSignInEmail(e.target.value)}
+              className="outline-none w-full bg-transparent"
+              required
+            />
+          </div>
+          <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
+            <FiLock size={20} className="text-gray-400 mr-3" />
+            <input
+              type="password"
+              placeholder="Password"
+              value={signInPassword}
+              onChange={(e) => setSignInPassword(e.target.value)}
+              className="outline-none w-full bg-transparent"
+              required
+            />
+          </div>
+          <div className="text-center">
+            <button
+              type="button"
+              className="text-center underline font-semibold cursor-pointer text-[#EDA415] hover:text-[#d7920a] transition"
+            >
+              Forgot password?
+            </button>
+          </div>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-[#EDA415] text-white font-medium py-3 px-12 rounded-full hover:bg-[#d7920a] transition"
+            >
+              SIGN IN
+            </button>
+          </div>
+        </form>
+      </>
+    )}
+  </div>
 
-        {/* Sign Up Form - Desktop */}
-        <div
-          className={`absolute top-0 left-0 w-[60%] h-full flex flex-col justify-center items-center bg-white px-10 transition-opacity duration-500 ${
-            isSignUp ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
+  {/* Prompt Side */}
+  <div className="w-[40%] h-full flex flex-col justify-center items-center text-white px-6 bg-[#003F62] transition-all duration-700 ease-in-out">
+    {isSignUp ? (
+      <>
+        <h2 className="text-3xl xl:text-5xl font-bold mb-4 text-center">
+          Welcome Back!
+        </h2>
+        <p className="mb-6 text-center text-base xl:text-lg font-light max-w-xs xl:max-w-sm">
+          To keep connected with us please login with your personal info
+        </p>
+        <button
+          onClick={() => setIsSignUp(false)}
+          className="border-2 border-white px-8 xl:px-12 py-3 xl:py-4 mt-5 rounded-full hover:bg-white hover:text-[#003F62] transition text-sm xl:text-base"
         >
-          <h2 className="text-3xl xl:text-5xl font-bold text-[#EDA415] mb-6 text-center">
-            Create Account
-          </h2>
-          <form className="space-y-4 w-full max-w-md" onSubmit={handleSignUp}>
-            <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
-              <FiUser size={20} className="text-gray-400 mr-3" />
-              <input
-                type="text"
-                placeholder="Name"
-                value={signUpName}
-                onChange={(e) => setSignUpName(e.target.value)}
-                className="bg-transparent outline-none w-full"
-                required
-              />
-            </div>
-            <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
-              <FiMail size={20} className="text-gray-400 mr-3" />
-              <input
-                type="email"
-                placeholder="Email"
-                value={signUpEmail}
-                onChange={(e) => setSignUpEmail(e.target.value)}
-                className="outline-none w-full bg-transparent"
-                required
-              />
-            </div>
-            <div className="flex items-center bg-gray-100 px-4 py-3 rounded">
-              <FiLock size={20} className="text-gray-400 mr-3" />
-              <input
-                type="password"
-                placeholder="Password"
-                value={signUpPassword}
-                onChange={(e) => setSignUpPassword(e.target.value)}
-                className="outline-none w-full bg-transparent"
-                required
-              />
-            </div>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="bg-[#EDA415] text-white font-medium py-3 px-12 rounded-full hover:bg-[#d7920a] transition"
-              >
-                SIGN UP
-              </button>
-            </div>
-          </form>
-        </div>
+          SIGN IN
+        </button>
+      </>
+    ) : (
+      <>
+        <h2 className="text-3xl xl:text-5xl font-bold mb-4 text-center">
+          Hello, Friend!
+        </h2>
+        <p className="mb-6 text-center text-base xl:text-lg font-light max-w-xs xl:max-w-sm">
+          Enter your personal details and start your journey with us
+        </p>
+        <button
+          onClick={() => setIsSignUp(true)}
+          className="border-2 border-white px-8 xl:px-12 py-3 xl:py-4 mt-5 rounded-full hover:bg-white hover:text-[#003F62] transition text-sm xl:text-base"
+        >
+          SIGN UP
+        </button>
+      </>
+    )}
+  </div>
+</div>
 
-        {/* Sliding Panel - Desktop */}
-        <div
-          className={`absolute top-0 w-[40%] h-full flex flex-col justify-center items-center text-white px-6 transition-transform duration-700 ease-in-out bg-[#003F62] ${
-            isSignUp ? "translate-x-[150%]" : "translate-x-0"
-          }`}
-        >
-          {isSignUp ? (
-            <>
-              <h2 className="text-3xl xl:text-5xl font-bold mb-4 text-center">
-                Hello, Friend!
-              </h2>
-              <p className="mb-6 text-center text-base xl:text-lg font-light max-w-xs xl:max-w-sm">
-                Enter your personal details and start your journey with us
-              </p>
-              <button
-                onClick={() => setIsSignUp(false)}
-                className="border-2 border-white px-8 xl:px-12 py-3 xl:py-4 mt-5 rounded-full hover:bg-white hover:text-[#003F62] transition text-sm xl:text-base"
-              >
-                SIGN UP
-              </button>
-            </>
-          ) : (
-            <>
-              <h2 className="text-3xl xl:text-5xl font-bold mb-4 text-center">
-                Welcome Back!
-              </h2>
-              <p className="mb-6 text-center text-base xl:text-lg font-light max-w-xs xl:max-w-sm">
-                To keep connected with us please login with your personal info
-              </p>
-              <button
-                onClick={() => setIsSignUp(true)}
-                className="border-2 border-white px-8 xl:px-12 py-3 xl:py-4 mt-5 rounded-full hover:bg-white hover:text-[#003F62] transition text-sm xl:text-base"
-              >
-                SIGN IN
-              </button>
-            </>
-          )}
-        </div>
-      </div>
+
     </div>
   );
 }
